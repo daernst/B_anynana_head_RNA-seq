@@ -30,7 +30,6 @@ gunzip /home/daernst/B_anynana_Larva_Adult_Head_Study/B_anynana_genome/Bicyclus_
 
 
 ### Align reads to genome ###
-
 for SAMPLE in F1-Ad-2_S9 F1-Ad-6_S6 F1-L-1_S1 F2-Ad-1_S2 F2-Ad-2_S11 F2-L-1_S5 F3-Ad-3_S4 F3-L-2_S12 F3-L-7_S7 F4-Ad-1_S8 F4-L-1_S10 F4-L-4_S3
 
 do
