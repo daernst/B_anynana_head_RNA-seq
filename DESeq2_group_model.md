@@ -2,18 +2,19 @@
 
 ```
 ### Load required packages ###
-library(DESeq2))
+library(DESeq2)
 library(apeglm)
 library(dplyr)
+library(readr)
 
 
 ### Read in table containing sample and read counts file information (sampleName, fileName, family, sex, stage, and grouping variable) ###
-sampleTable <- read.csv("D:/Documents/B_anynana_Larva_Adult_Head_Study/sampleTable.csv")
+sampleTable <- read_csv("D:/Documents/B_anynana_Larva_Adult_Head_Study/sampleTable.csv")
 
 
 ### Build DESeqDataSet using htseq-count output files ###
 ddsHTSeq <- DESeqDataSetFromHTSeqCount(sampleTable = sampleTable,
-                                       directory = "D:/Documents/B_anynana_Larva_Adult_Head_Study/Revised_study_for_BMC_Genomics/htseq-count_output_CORRECT",
+                                       directory = "D:/Documents/B_anynana_Larva_Adult_Head_Study/htseq-count_output",
                                        design = ~ group)
 
 
@@ -51,7 +52,9 @@ sum(res.lfcShrink_adult$padj < 0.05,
 annot <- read.csv("Bicyclus_anynana_v1_2_genes_only_b2g_functional_annotation_B2G-Desc_and_Best_Hit_3.csv")
 res.lfcShrink_adult$SeqName <- row.names(res.lfcShrink_adult)
 res.lfcShrink_adult <- as.data.frame(res.lfcShrink_adult) %>% 
-  right_join(annot, ., by="SeqName")
+  right_join(annot,
+             .,
+             by="SeqName")
 
 
 ### Order all results by FDR ###
@@ -108,7 +111,9 @@ sum(res.lfcShrink_larva$padj < 0.05,
 ### Add functional annotations to results ###
 res.lfcShrink_larva$SeqName <- row.names(res.lfcShrink_larva)
 res.lfcShrink_larva <- as.data.frame(res.lfcShrink_larva) %>% 
-  right_join(annot, ., by="SeqName")
+  right_join(annot,
+             .,
+             by="SeqName")
 
 
 ### Order all results by FDR ###
