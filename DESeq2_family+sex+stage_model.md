@@ -14,7 +14,7 @@ sampleTable <- read_csv("D:/Documents/B_anynana_Larva_Adult_Head_Study/sampleTab
 
 ### Build DESeqDataSet using htseq-count output files ###
 ddsHTSeq <- DESeqDataSetFromHTSeqCount(sampleTable = sampleTable,
-                                       directory = "D:/Documents/B_anynana_Larva_Adult_Head_Study/Revised_study_for_BMC_Genomics/htseq-count_output_CORRECT",
+                                       directory = "D:/Documents/B_anynana_Larva_Adult_Head_Study/htseq-count_output",
                                        design = ~ family + sex + stage)
 
 
