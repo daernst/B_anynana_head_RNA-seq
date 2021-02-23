@@ -2,7 +2,7 @@
 
 ```
 ### Load required packages ###
-library(DESeq2))
+library(DESeq2)
 library(apeglm)
 library(readr)
 library(dplyr)
@@ -18,7 +18,7 @@ ddsHTSeq <- DESeqDataSetFromHTSeqCount(sampleTable = sampleTable,
                                        design = ~ family + sex + stage)
 
 
-### Set Larva as the reference level for ~ family + sex + stage design ###
+### Set Larva as the reference level ###
 ddsHTSeq$stage <- relevel(ddsHTSeq$stage, 
                           ref = "Larva")
 
@@ -52,7 +52,8 @@ sum(res.lfcShrink$padj < 0.05,
 annot <- read_csv("Bicyclus_anynana_v1_2_genes_only_b2g_functional_annotation_B2G-Desc_and_Best_Hit_3.csv")
 res.lfcShrink$SeqName <- row.names(res.lfcShrink)
 res.lfcShrink <- as.data.frame(res.lfcShrink) %>% 
-  right_join(annot, ., 
+  right_join(annot,
+             ., 
              by="SeqName")
 
 
@@ -105,8 +106,8 @@ vol <- ggplot(dat,
   scale_color_identity() +
   geom_hline(yintercept=0, 
              linetype="dashed") +
-  geom_vline(xintercept=0, l
-             inetype="dashed") +
+  geom_vline(xintercept=0, 
+             linetype="dashed") +
   labs(x = expression("log"[2]*"FC"),
        y = expression("-log"[10]*"FDR")) +
   theme_bw() +
